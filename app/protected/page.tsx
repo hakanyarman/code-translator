@@ -4,6 +4,7 @@ import { createClient } from '@/utils/supabase/server';
 import FetchDataSteps from '@/components/tutorial/FetchDataSteps';
 import Header from '@/components/Header';
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 export default async function ProtectedPage() {
   const supabase = createClient();
@@ -26,10 +27,41 @@ export default async function ProtectedPage() {
         <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
           <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
             <AuthButton />
+
+            {/* <Link
+              href="/"
+              className="focus:outline-none text-white bg-purple-700
+              hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium
+              rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600
+              dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+            >
+              Home Page
+            </Link> */}
           </div>
         </nav>
+        <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
+          <Link
+            href="/"
+            className="rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>{' '}
+            Home Page
+          </Link>
+        </div>
       </div>
-
       {/* <div className="flex-1 flex flex-col gap-20 max-w-4xl px-3">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Your message
@@ -41,7 +73,6 @@ export default async function ProtectedPage() {
           placeholder="Write your thoughts here..."
         ></textarea>
       </div> */}
-
       <div className="flex-1 flex flex-col gap-20 max-w-4xl px-1">
         {/* <form className="max-w-sm mx-auto">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -93,7 +124,6 @@ export default async function ProtectedPage() {
           </div>
         </form>
       </div>
-
       <div className="flex space-x-4">
         <div>
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -121,7 +151,6 @@ export default async function ProtectedPage() {
           </textarea>
         </div>
       </div>
-
       <div>
         <button
           type="button"
@@ -130,7 +159,6 @@ export default async function ProtectedPage() {
           Translate Code
         </button>
       </div>
-
       <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
         <p>
           Powered by{' '}
