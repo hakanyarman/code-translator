@@ -85,7 +85,7 @@ export default function Chat() {
         Back
       </Link>
 
-      <div className="bg-green-200 border border-gray-300 rounded-lg p-4 w-full max-w-md">
+      <div className="bg-green-100 border border-gray-300 rounded-lg p-4 w-full max-w-md">
         {messages.map((m) => (
           <div key={m.id} className="mb-2">
             <strong>{m.role === 'user' ? 'Sen: ' : 'AI: '}</strong>
@@ -93,7 +93,7 @@ export default function Chat() {
           </div>
         ))}
 
-        <form onSubmit={handleSubmit} className="mt-4">
+        <form onSubmit={handleSubmit} className="mt-4 ">
           <input
             value={input}
             placeholder="Say something..."
@@ -101,11 +101,12 @@ export default function Chat() {
             className="bg-orange-50 border border-gray-300 text-gray-900 text-sm text-neutral-950 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full max-w-xs p-2.5 my-2"
             style={{ width: '300px' }} // Set a fixed width for the input field
           />
+
           <input
             type="submit"
             value="Gönder"
             onClick={handleSubmit}
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-5 my-2"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-5 my-2 mx-auto"
           />
         </form>
       </div>

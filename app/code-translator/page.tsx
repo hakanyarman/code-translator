@@ -932,7 +932,9 @@ export default function CodeTranslator() {
 
       {translatedCode && (
         <div className="mt-6">
-          <h2 className="text-xl font-bold mb-2">Translated Code:</h2>
+          <h2 className="text-xl font-bold mb-2 text-black	 ">
+            Translated Code:
+          </h2>
           <pre className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg p-4">
             {translatedCode}
           </pre>
