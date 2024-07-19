@@ -56,22 +56,22 @@ export default async function Index() {
   return (
     // eski ana sayfa
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-        <div className="w-70 max-w-4xl flex justify-between items-center p-3 text-sm">
+      <nav className="w-full flex-row  border-b border-b-foreground/10 h-16">
+        <div className="w-70 max-w-4xl flex justify-between items-center p-3 text-sm basis-1/4">
           {isSupabaseConnected && <AuthButton />}
 
           {/* <DeployButton /> */}
         </div>
 
         <Link
-          href="/protected"
-          className="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-100 h-100 mt-2"
+          href="/code-translator"
+          className="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-100 h-100 mt-2  basis-1/4 mx-2"
         >
           Translate Code
         </Link>
         <Link
           href="/chat"
-          className="text-gray-900 bg-gradient-to-r from-pink-200 via-pink-400 to-pink-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-100 h-100 mt-2"
+          className="text-gray-900 bg-gradient-to-r from-pink-200 via-pink-400 to-pink-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-100 h-100 mt-2 basis-1/4"
         >
           Chat With AI
         </Link>
