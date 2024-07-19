@@ -90,7 +90,7 @@ export default async function Index() {
           <a
             href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
             target="_blank"
-            className="font-bold hover:underline"
+            className="font-bold hover:underline text-neutral-950"
             rel="noreferrer"
           >
             Supabase

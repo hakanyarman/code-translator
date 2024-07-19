@@ -855,7 +855,9 @@ export default function CodeTranslator() {
   return (
     <div className="container mx-auto p-4">
       <div className="grid grid-cols-2 gap-4 place-content-center h-48">
-        <h1 className="text-2xl font-bold mb-4">Code Translator</h1>
+        <h1 className="text-2xl font-bold mb-4 text-neutral-950">
+          Code Translator
+        </h1>
         <Link
           href="/"
           className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
