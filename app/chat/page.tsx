@@ -98,7 +98,7 @@ export default function Chat() {
             value={input}
             placeholder="Say something..."
             onChange={handleInputChange}
-            className="bg-orange-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full max-w-xs p-2.5 my-2"
+            className="bg-orange-50 border border-gray-300 text-gray-900 text-sm text-neutral-950 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full max-w-xs p-2.5 my-2"
             style={{ width: '300px' }} // Set a fixed width for the input field
           />
           <input

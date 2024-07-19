@@ -71,7 +71,7 @@ export default function Header() {
       </div>
       <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
       <div className="shadow-md shadow-indigo-500/40 bg-red-50 border border-gray-300">
-        <p className="text-3xl lg:text-xl !leading-tight mx-auto max-w-xl text-center ">
+        <p className="text-3xl lg:text-xl !leading-tight mx-auto max-w-xl text-center text-neutral-950 ">
           {/* The fastest way to build apps with{" "} */}
           Easily and reliably convert your code from one programming language to
           another! Our application supports code translations between{' '}
