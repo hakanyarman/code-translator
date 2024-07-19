@@ -56,7 +56,7 @@ export default async function Index() {
   return (
     // eski ana sayfa
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <nav className="w-full flex-row  border-b border-b-foreground/10 h-16">
+      <nav className="w-full flex-row  border-b border-b-foreground/10 h-16 bg-red-50 border border-gray-300">
         <div className="w-70 max-w-4xl flex justify-between items-center p-3 text-sm basis-1/4">
           {isSupabaseConnected && <AuthButton />}
 
@@ -81,6 +81,7 @@ export default async function Index() {
         <main className="flex-1 flex flex-col gap-6">
           {/* <h2 className="font-bold text-4xl mb-4">Next steps</h2>
           {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />} */}
+          {/* <p>databaseden bu sayfaya veri çekmeyi dene.</p> */}
         </main>
       </div>
       <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">

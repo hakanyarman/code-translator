@@ -85,7 +85,7 @@ export default function Chat() {
         Back
       </Link>
 
-      <div className="bg-gray-100 border border-gray-300 rounded-lg p-4 w-full max-w-md">
+      <div className="bg-green-200 border border-gray-300 rounded-lg p-4 w-full max-w-md">
         {messages.map((m) => (
           <div key={m.id} className="mb-2">
             <strong>{m.role === 'user' ? 'Sen: ' : 'AI: '}</strong>

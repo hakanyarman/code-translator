@@ -52,7 +52,7 @@ import SupabaseLogo from './SupabaseLogo';
 
 export default function Header() {
   return (
-    <div className="flex flex-col gap-16 items-center">
+    <div className="flex flex-col gap-16 items-center ">
       <div className="flex gap-8 justify-center items-center">
         {/* <a
           href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
@@ -65,10 +65,12 @@ export default function Header() {
         <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
           <NextLogo />
         </a> */}
-        <h2 className="text-blue-600 text-xl">Code Translator App</h2>
+        <h2 className="text-blue-900 text-3xl font-bold	underline decoration-wavy decoration-red-300	">
+          Code Translator App
+        </h2>
       </div>
       <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
-      <div className="shadow-md shadow-indigo-500/40">
+      <div className="shadow-md shadow-indigo-500/40 bg-red-50 border border-gray-300">
         <p className="text-3xl lg:text-xl !leading-tight mx-auto max-w-xl text-center ">
           {/* The fastest way to build apps with{" "} */}
           Easily and reliably convert your code from one programming language to
