@@ -8,6 +8,8 @@ import SignUpUserSteps from '@/components/tutorial/SignUpUserSteps';
 import Header from '@/components/Header';
 import Link from 'next/link';
 
+import { Button } from '@/components/ui/button';
+
 //
 // import { useChat } from 'ai/react';
 //
