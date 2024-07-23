@@ -4,6 +4,51 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import * as React from 'react';
+import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
+import { useTheme } from 'next-themes';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
+// export function ModeToggle() {
+//   const { setTheme } = useTheme();
+
+//   return (
+//     <DropdownMenu>
+//       <DropdownMenuTrigger asChild>
+//         <Button variant="outline" size="icon">
+//           <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+//           <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+//           <span className="sr-only">Toggle theme</span>
+//         </Button>
+//       </DropdownMenuTrigger>
+//       <DropdownMenuContent align="end">
+//         <DropdownMenuItem onClick={() => setTheme('light')}>
+//           Light
+//         </DropdownMenuItem>
+//         <DropdownMenuItem onClick={() => setTheme('dark')}>
+//           Dark
+//         </DropdownMenuItem>
+//         <DropdownMenuItem onClick={() => setTheme('system')}>
+//           System
+//         </DropdownMenuItem>
+//       </DropdownMenuContent>
+//     </DropdownMenu>
+//   );
+// }
 
 export default function CodeTranslator() {
   const [code, setCode] = useState('');
@@ -74,6 +119,7 @@ export default function CodeTranslator() {
 
   return (
     <div className="container mx-auto p-4">
+      {/* {ModeToggle()} */}
       <div className="grid grid-cols-2 gap-4 place-content-center h-48">
         <h1 className="text-2xl font-bold mb-4 text-neutral-950">
           Code Translator
@@ -123,7 +169,7 @@ export default function CodeTranslator() {
           >
             Target Language:
           </label>
-          <select
+          {/* <select
             id="targetLanguage"
             value={targetLanguage}
             onChange={(e) => setTargetLanguage(e.target.value)}
@@ -138,7 +184,28 @@ export default function CodeTranslator() {
             <option value="Ruby">Ruby</option>
             <option value="Go">Go</option>
             <option value="PHP">PHP</option>
-          </select>
+          </select> */}
+          <Select
+            value={targetLanguage}
+            onValueChange={setTargetLanguage}
+            //@ts-ignore
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            required
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Target Language" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Python">Python</SelectItem>
+              <SelectItem value="JavaScript">JavaScript</SelectItem>
+              <SelectItem value="Java">Java</SelectItem>
+              <SelectItem value="C++">C++</SelectItem>
+              <SelectItem value="C#">C#</SelectItem>
+              <SelectItem value="Ruby">Ruby</SelectItem>
+              <SelectItem value="Go">Go</SelectItem>
+              <SelectItem value="PHP">PHP</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         <button
