@@ -1,7 +1,5 @@
-import DeployButton from '@/components/DeployButton';
 import AuthButton from '@/components/AuthButton';
 import { createClient } from '@/utils/supabase/server';
-import FetchDataSteps from '@/components/tutorial/FetchDataSteps';
 import Header from '@/components/Header';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
@@ -27,16 +25,6 @@ export default async function ProtectedPage() {
         <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
           <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
             <AuthButton />
-
-            {/* <Link
-              href="/"
-              className="focus:outline-none text-white bg-purple-700
-              hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium
-              rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600
-              dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-            >
-              Home Page
-            </Link> */}
           </div>
         </nav>
         <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
@@ -62,33 +50,8 @@ export default async function ProtectedPage() {
           </Link>
         </div>
       </div>
-      {/* <div className="flex-1 flex flex-col gap-20 max-w-4xl px-3">
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Your message
-        </label>
-        <textarea
-          id="message"
-          rows={15}
-          className="block p-2.5 w-96 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Write your thoughts here..."
-        ></textarea>
-      </div> */}
+
       <div className="flex-1 flex flex-col gap-20 max-w-4xl px-1">
-        {/* <form className="max-w-sm mx-auto">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-            Select an option
-          </label>
-          <select
-            id="countries"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          >
-            <option selected>Choose a country</option>
-            <option value="US">United States</option>
-            <option value="CA">Canada</option>
-            <option value="FR">France</option>
-            <option value="DE">Germany</option>
-          </select>
-        </form> */}
         <form className="max-w-lg mx-auto">
           <div className="flex space-x-4">
             <div className="w-full">
