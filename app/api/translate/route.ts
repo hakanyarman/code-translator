@@ -72,7 +72,7 @@ export async function POST(req: Request) {
       stream: false,
       max_tokens: 300,
     });
-    console.log('Anthropic response:', response);
+    // console.log('Anthropic response:', response);
 
     // Assuming response.content[0].text contains the translated code
     //@ts-ignore

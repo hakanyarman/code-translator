@@ -1307,6 +1307,7 @@ export default function CodeTranslator() {
           <SyntaxHighlighter
             language={getLanguage(targetLanguage)}
             style={solarizedlight}
+            showLineNumbers={true}
           >
             {translatedCode}
           </SyntaxHighlighter>
