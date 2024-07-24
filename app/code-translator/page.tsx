@@ -110,7 +110,7 @@ export default function CodeTranslator() {
         <h2 className="text-blue-900 text-2xl font-bold">Code Translator</h2>
       </div>
       <form onSubmit={handleSubmit}>
-        <div className="mb-4 mt-6 pt-4">
+        <div className="mb-4 mt-6 pt-4 ">
           <label
             htmlFor="code"
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -121,7 +121,7 @@ export default function CodeTranslator() {
             id="code"
             value={code}
             onChange={(e) => setCode(e.target.value)}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-600 block w-full p-2.5 h-48"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-600 block w-full p-2.5 h-48 shadow-2xl shadow-indigo-500/40  border border-gray-300"
             required
           ></textarea>
         </div>
@@ -167,13 +167,15 @@ export default function CodeTranslator() {
           <h2 className="text-xl font-bold mb-2 text-black">
             Translated Code:
           </h2>
-          <SyntaxHighlighter
-            language={getLanguage(targetLanguage)}
-            style={solarizedlight}
-            showLineNumbers={true}
-          >
-            {translatedCode}
-          </SyntaxHighlighter>
+          <div className="shadow-2xl shadow-indigo-500/40 bg-red-50 border border-gray-300 rounded-md">
+            <SyntaxHighlighter
+              language={getLanguage(targetLanguage)}
+              style={solarizedlight}
+              showLineNumbers={true}
+            >
+              {translatedCode}
+            </SyntaxHighlighter>
+          </div>
           <button
             onClick={handleCopy}
             className="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1 mt-2"
