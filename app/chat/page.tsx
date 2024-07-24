@@ -10,7 +10,7 @@ export default function Chat() {
     <div className="flex flex-col items-center justify-center h-screen">
       <Link
         href="/"
-        className="absolute top-8 left-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
+        className="absolute top-8 left-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm bg-neutral-300"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

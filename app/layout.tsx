@@ -9,7 +9,7 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: 'Code Translator',
-  description: 'The fastest way to build apps with Next.js and Supabase',
+  description: 'Translate Your Code Into The Language You Want',
 };
 
 export default function RootLayout({
@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="bg-background text-foreground h-14 bg-gradient-to-r from-slate-50 to-slate-100 to-gray-50">
+      <body className="bg-background text-foreground h-14 bg-gradient-to-r from-slate-50 to-slate-100 to-gray-50 absolute inset-0 h-full w-full bg-white bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
