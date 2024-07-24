@@ -161,7 +161,7 @@ export default function Chat() {
       <div className="bg-green-100 border border-gray-300 rounded-lg p-4 w-full max-w-md flex flex-col h-full max-h-96 mt-6 shadow-2xl shadow-indigo-500/40 bg-red-50 border border-gray-300">
         <div className="flex-grow overflow-y-auto mb-4">
           {messages.map((m) => (
-            <div key={m.id} className="mb-2">
+            <div key={m.id} className="mb-2 text-slate-950">
               <strong>{m.role === 'user' ? 'You: ' : 'AI: '}</strong>
               {m.content}
             </div>
