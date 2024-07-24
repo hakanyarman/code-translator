@@ -110,9 +110,7 @@ export default async function Index() {
       </div>
 
       <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
-        <p className="text-neutral-950">
-          &copy; {new Date().getFullYear()} Code Translator
-        </p>
+        <p className="text-neutral-950"></p>
       </footer>
     </div>
   );

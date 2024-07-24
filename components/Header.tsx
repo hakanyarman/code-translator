@@ -59,23 +59,23 @@ export default function Header() {
       </div>
       <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
       <div className="shadow-2xl shadow-indigo-500/40 bg-red-50 border border-gray-300">
-        <p className="text-3xl lg:text-xl !leading-tight mx-auto max-w-xl text-center text-neutral-950  ">
+        <p className="text-3xl lg:text-xl !leading-tight mx-auto max-w-xl text-center text-neutral-950 ">
           {/* The fastest way to build apps with{" "} */}
           Easily and reliably convert your code from one programming language to
           another! Our application supports code translations between{' '}
-          <a className="underline decoration-pink-500 decoration-dashed decoration-2">
+          <a className="underline decoration-pink-500 decoration-dashed decoration-2 font-semibold">
             Python
           </a>{' '}
           ,
-          <a className="underline decoration-sky-500 decoration-dashed decoration-2">
+          <a className="underline decoration-sky-500 decoration-dashed decoration-2 font-semibold">
             Javascript
           </a>
           ,{' '}
-          <a className="underline decoration-indigo-500 decoration-dashed decoration-2">
+          <a className="underline decoration-indigo-500 decoration-dashed decoration-2 font-semibold">
             Java
           </a>
           ,{' '}
-          <a className="underline decoration-orange-500 decoration-dashed decoration-2">
+          <a className="underline decoration-orange-500 decoration-dashed decoration-2 font-semibold">
             C#
           </a>
           , and many more.
