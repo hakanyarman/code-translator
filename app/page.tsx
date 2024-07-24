@@ -4,6 +4,7 @@ import AuthButton from '../components/AuthButton';
 import { createClient } from '@/utils/supabase/server';
 import Header from '@/components/Header';
 import Link from 'next/link';
+import IconCloud from '@/components/magicui/icon-cloud';
 
 import { Button } from '@/components/ui/button';
 
@@ -34,6 +35,39 @@ import { Button } from '@/components/ui/button';
 //
 
 export default async function Index() {
+  const slugs = [
+    'typescript',
+    'javascript',
+    'dart',
+    'java',
+    'react',
+    'flutter',
+    'android',
+    'html5',
+    'css3',
+    'nodedotjs',
+    'express',
+    'nextdotjs',
+    'prisma',
+    'amazonaws',
+    'postgresql',
+    'firebase',
+    'nginx',
+    'vercel',
+    'testinglibrary',
+    'jest',
+    'cypress',
+    'docker',
+    'git',
+    'jira',
+    'github',
+    'gitlab',
+    'visualstudiocode',
+    'androidstudio',
+    'sonarqube',
+    'figma',
+  ];
+
   const canInitSupabaseClient = () => {
     try {
       createClient();
@@ -65,10 +99,16 @@ export default async function Index() {
           Chat With AI
         </Link>
       </nav>
-      <div className="flex-1 flex flex-col gap-20 max-w-4xl px-3">
+      <div className="flex-1 flex flex-col max-w-4xl px-3">
         <Header />
-        <main className="flex-1 flex flex-col gap-6"></main>
+
+        <main className="flex-1 items-center flex flex-col gap-6">
+          <div className="relative flex h-full w-full max-w-[25rem] items-center justify-center overflow-hidden rounded-lg border bg-background px-20 pb-20 pt-2 ">
+            <IconCloud iconSlugs={slugs} />
+          </div>
+        </main>
       </div>
+
       <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
         <p className="text-neutral-950">
           Powered by{''}
