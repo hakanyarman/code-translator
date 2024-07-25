@@ -75,7 +75,7 @@ export default function Login({
         Back
       </Link>
 
-      <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
+      <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground ">
         <label className="text-md text-neutral-950" htmlFor="email">
           Email
         </label>
