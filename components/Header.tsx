@@ -53,7 +53,10 @@ export default function Header() {
   return (
     <div className="flex flex-col gap-16 items-center ">
       <div className="flex gap-8 justify-center items-center drop-shadow-2xl relative z-10 bg-gray-100 rounded-lg">
-        <h2 className="text-blue-900 text-4xl font-bold underline decoration-wavy decoration-red-300">
+        <h2
+          className="text-blue-900 text-4xl font-bold underline decoration-double
+ decoration-red-300"
+        >
           Code Translator
         </h2>
       </div>

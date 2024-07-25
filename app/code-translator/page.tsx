@@ -9,6 +9,9 @@ import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
 
+import { createClient } from '@/utils/supabase/server';
+import { redirect } from 'next/navigation';
+import AuthButton from '@/components/AuthButton';
 import {
   Select,
   SelectContent,

@@ -103,7 +103,7 @@ export default async function Index() {
         <Header />
 
         <main className="flex-1 items-center flex flex-col gap-6">
-          <div className="relative flex h-full w-full max-w-[25rem] items-center justify-center overflow-hidden rounded-lg border bg-background px-20 pb-20 pt-2 ">
+          <div className="relative flex h-full w-full max-w-[25rem] items-center justify-center overflow-hidden  bg-background px-20 pb-20 pt-2 absolute inset-0 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:14px_14px] ">
             <IconCloud iconSlugs={slugs} />
           </div>
         </main>

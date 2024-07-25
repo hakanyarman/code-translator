@@ -15,7 +15,7 @@ export default function Login({
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const supabase = createClient();
-    const redirectUrl = searchParams.redirect || '/protected'; // Default to /protected if no redirect is specified
+    const redirectUrl = searchParams.redirect || '/code-translator'; // Default to /protected if no redirect is specified
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
