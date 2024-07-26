@@ -13,9 +13,9 @@ export async function POST(req: Request) {
 
     const prompt = includeComments
       ? `You are a code translator. Translate the following code to the specified programming language without any explanation. just target language code.
-          no title. only code. Code: ${code}\nTranslate to: ${targetLanguage} just add comments explaining the functionality of each lines dont give the target language in three apostrophe dont give markdown signs and target language name`
+          no title. only code. Code: ${code}\nTranslate to: ${targetLanguage} just add comments explaining the functionality of each lines.  dont give markdown signs and target language name. dont give target language in backtick character.for example never give me code in. \`\`\`  javascript  \`\`\`  `
       : `You are a code translator. Translate the following code to the specified programming language without any explanation. just target language code.
-          no title. only code. Code: ${code}\nTranslate to: ${targetLanguage} dont give markdown signs and target language name dont give the target language in three apostrophe`;
+          no title. only code. Code: ${code}\nTranslate to: ${targetLanguage} dont give markdown signs and target language name. dont give target language in backtick character. for example never give me code in. \`\`\`  javascript  \`\`\` `;
 
     const response = await anthropic.messages.create({
       messages: [
