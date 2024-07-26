@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
 
 export default function CodeTranslator() {
   const [code, setCode] = useState('');
@@ -26,6 +27,7 @@ export default function CodeTranslator() {
   const [translatedCode, setTranslatedCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [includeComments, setIncludeComments] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +40,7 @@ export default function CodeTranslator() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ code, targetLanguage }),
+        body: JSON.stringify({ code, targetLanguage, includeComments }),
       });
 
       if (!response.ok) {
@@ -154,6 +156,14 @@ export default function CodeTranslator() {
               <SelectItem value="PHP">PHP</SelectItem>
             </SelectContent>
           </Select>
+          <label>
+            <input
+              type="checkbox"
+              checked={includeComments}
+              onChange={(e) => setIncludeComments(e.target.checked)}
+            />
+            Add descriptive comment lines in target code
+          </label>
         </div>
 
         <button

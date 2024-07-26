@@ -9,14 +9,19 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
   try {
-    const { code, targetLanguage } = await req.json();
+    const { code, targetLanguage, includeComments } = await req.json();
+
+    const prompt = includeComments
+      ? `You are a code translator. Translate the following code to the specified programming language without any explanation. just target language code.
+          no title. only code. Code: ${code}\nTranslate to: ${targetLanguage} just add comments explaining the functionality of each lines dont give the target language in three apostrophe dont give markdown signs and target language name`
+      : `You are a code translator. Translate the following code to the specified programming language without any explanation. just target language code.
+          no title. only code. Code: ${code}\nTranslate to: ${targetLanguage} dont give markdown signs and target language name dont give the target language in three apostrophe`;
 
     const response = await anthropic.messages.create({
       messages: [
         {
           role: 'user',
-          content: `You are a code translator. Translate the following code to the specified programming language without any explanation. just target language code.
-          no title. only code. Code: ${code}\nTranslate to: ${targetLanguage}`,
+          content: prompt,
         },
       ],
       model: 'claude-3-haiku-20240307',
