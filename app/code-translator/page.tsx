@@ -91,7 +91,7 @@ export default function CodeTranslator() {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex items-center mb-4">
+      <div className="flex items-center mb-4 bg-gray-100">
         <Link
           href="/"
           className="py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm bg-neutral-300 mr-4"
@@ -156,14 +156,16 @@ export default function CodeTranslator() {
               <SelectItem value="PHP">PHP</SelectItem>
             </SelectContent>
           </Select>
-          <label>
-            <input
-              type="checkbox"
-              checked={includeComments}
-              onChange={(e) => setIncludeComments(e.target.checked)}
-            />
-            Add descriptive comment lines in target code
-          </label>
+          <div className="mt-3">
+            <label>
+              <input
+                type="checkbox"
+                checked={includeComments}
+                onChange={(e) => setIncludeComments(e.target.checked)}
+              />
+              Add descriptive comment lines in target code
+            </label>
+          </div>
         </div>
 
         <button
