@@ -16,9 +16,9 @@ export default async function AuthButton() {
     await supabase.auth.signOut();
     return redirect('/login');
   };
-  //@ts-ignore
-  const email: string = user.email;
-  const username: string = email.split('@')[0];
+
+  const email = user?.email;
+  const username = email?.split('@')[0];
   return user ? (
     <div className="flex items-center gap-1 w-full">
       <p>
