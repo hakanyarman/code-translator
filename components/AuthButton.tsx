@@ -16,10 +16,15 @@ export default async function AuthButton() {
     await supabase.auth.signOut();
     return redirect('/login');
   };
-
+  //@ts-ignore
+  const email: string = user.email;
+  const username: string = email.split('@')[0];
   return user ? (
-    <div className="flex items-center gap-2">
-      Welcome,<span className="font-semibold">{user.email}!</span>
+    <div className="flex items-center gap-1 w-full">
+      <p>
+        Welcome,<span className="font-semibold">{username}!</span>
+      </p>
+
       <form action={signOut}>
         <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 mr-2">
           Logout
