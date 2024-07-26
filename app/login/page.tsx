@@ -76,6 +76,9 @@ export default function Login({
       </Link>
 
       <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground ">
+        <h2 className="text-center text-2xl bg-gray-100">
+          Login To Translate Code
+        </h2>
         <label className="text-md text-neutral-950" htmlFor="email">
           Email
         </label>
