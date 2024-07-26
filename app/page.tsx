@@ -939,7 +939,7 @@ export default async function Index() {
           </div> */}
           <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background md:shadow-xl bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:14px_14px] ">
             <span className="pointer-events- whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300 bg-clip-text text-center text-3xl font-semibold leading-none text-transparent dark:from-white dark:to-black">
-              Translate Code!
+              Translate Code
             </span>
             <span className="pointer-events- whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300 bg-clip-text text-center text-3xl font-semibold leading-none text-transparent dark:from-white dark:to-black">
               to any language!{' '}
