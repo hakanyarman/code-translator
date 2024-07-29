@@ -156,7 +156,9 @@ export default function Chat() {
         </svg>
         Back
       </Link>
-      <h2 className="text-blue-900 text-2xl font-bold">Chat with AI</h2>
+      <h2 className="text-blue-900 text-2xl font-bold dark:text-white">
+        Chat with AI
+      </h2>
 
       <div className="bg-green-100 border border-gray-300 rounded-lg p-4 w-full max-w-md flex flex-col h-full max-h-96 mt-6 shadow-2xl shadow-indigo-500/40 bg-red-50 border border-gray-300">
         <div className="flex-grow overflow-y-auto mb-4">

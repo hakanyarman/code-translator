@@ -118,7 +118,7 @@ export default function CodeTranslator() {
         <div className="mb-4 mt-6 pt-4 ">
           <label
             htmlFor="code"
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-sm font-bold mb-2 dark:text-white"
           >
             Enter Code:
           </label>
@@ -133,7 +133,7 @@ export default function CodeTranslator() {
         <div className="mb-4">
           <label
             htmlFor="targetLanguage"
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-sm font-bold mb-2 dark:text-white"
           >
             Target Language:
           </label>
@@ -162,6 +162,7 @@ export default function CodeTranslator() {
                 type="checkbox"
                 checked={includeComments}
                 onChange={(e) => setIncludeComments(e.target.checked)}
+                className="mr-2"
               />
               Add descriptive comment lines in target code
             </label>
@@ -179,7 +180,7 @@ export default function CodeTranslator() {
 
       {translatedCode && (
         <div className="mt-6">
-          <h2 className="text-xl font-bold mb-2 text-black">
+          <h2 className="text-xl font-bold mb-2 text-black dark:text-white">
             Translated Code:
           </h2>
           <div className="shadow-2xl shadow-indigo-500/40 bg-red-50 border border-gray-300 rounded-md">

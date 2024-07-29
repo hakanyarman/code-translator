@@ -51,7 +51,7 @@
 
 export default function Header() {
   return (
-    <div className="flex flex-col gap-16 items-center ">
+    <div className="flex flex-col gap-16 items-center  ">
       <div className="flex gap-8 justify-center items-center drop-shadow-2xl relative z-10 bg-gray-100 rounded-lg">
         <h2
           className="text-blue-900 text-4xl font-bold underline decoration-double
@@ -62,7 +62,7 @@ export default function Header() {
       </div>
       <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
       <div className="shadow-2xl shadow-indigo-500/40 bg-red-50 border border-gray-300">
-        <p className="text-3xl lg:text-xl !leading-tight mx-auto max-w-xl text-center text-neutral-950 ">
+        <p className="text-3xl lg:text-xl !leading-tight mx-auto max-w-xl text-center text-neutral-950 dark:bg-slate-800 dark:text-white">
           {/* The fastest way to build apps with{" "} */}
           Easily and reliably convert your code from one programming language to
           another! Our application supports code translations between{' '}

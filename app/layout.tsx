@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="absolute inset-0 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:14px_14px]">
+      <body className="absolute inset-0 h-full w-full bg-white  [background-size:14px_14px] dark:bg-slate-800 ">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

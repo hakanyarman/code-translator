@@ -912,7 +912,7 @@ export default async function Index() {
 
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <nav className="w-full flex-row  border-b border-b-foreground/10 h-16 bg-red-50 border border-gray-300">
+      <nav className="w-full flex-row  border-b border-b-foreground/10 h-16 bg-red-50 border border-gray-300 dark:shadow-md dark:bg-slate-300">
         <div className="w-70 max-w-4xl flex justify-between items-center p-3 text-sm basis-1/4">
           {isSupabaseConnected && <AuthButton />}
         </div>
@@ -937,17 +937,17 @@ export default async function Index() {
           {/* <div className="relative flex h-full w-full max-w-[25rem] items-center justify-center overflow-hidden  bg-background px-20 pb-20 pt-2 absolute inset-0 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:14px_14px] ">
             <IconCloud iconSlugs={slugs} />
           </div> */}
-          <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background md:shadow-xl bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:14px_14px] ">
-            <span className="pointer-events- whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300 bg-clip-text text-center text-3xl font-semibold leading-none text-transparent dark:from-white dark:to-black">
+          <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background md:shadow-xl bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:14px_14px] dark:bg-slate-800  ">
+            <span className="pointer-events- whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300 bg-clip-text text-center text-3xl font-semibold leading-none text-transparent dark:from-white dark:to-black dark:text-white">
               Translate Code
             </span>
-            <span className="pointer-events- whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300 bg-clip-text text-center text-3xl font-semibold leading-none text-transparent dark:from-white dark:to-black">
+            <span className="pointer-events- whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300 bg-clip-text text-center text-3xl font-semibold leading-none text-transparent dark:from-white dark:to-black dark:text-white">
               to any language!{' '}
             </span>
 
             {/* Inner Circles */}
             <OrbitingCircles
-              className="size-[30px] border-none bg-transparent "
+              className="size-[30px] border-none bg-tranparent  "
               duration={20}
               delay={20}
               radius={80}
@@ -1028,8 +1028,8 @@ export default async function Index() {
         </main>
       </div>
 
-      <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
-        <p className="text-neutral-950 font-semibold">
+      <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs ">
+        <p className="text-neutral-950 font-semibold dark:text-white">
           © {new Date().getFullYear()} Code Translator
         </p>
       </footer>

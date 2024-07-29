@@ -76,23 +76,29 @@ export default function Login({
       </Link>
 
       <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground ">
-        <h2 className="text-center text-2xl bg-gray-100">
+        <h2 className="text-center text-2xl bg-gray-100 dark:text-slate-800">
           Login To Translate Code
         </h2>
-        <label className="text-md text-neutral-950" htmlFor="email">
+        <label
+          className="text-md text-neutral-950 dark:text-white"
+          htmlFor="email"
+        >
           Email
         </label>
         <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          className="email-input rounded-md px-4 py-2 bg-inherit border mb-6 dark:bg-white text-neutral-950"
           name="email"
           placeholder="you@example.com"
           required
         />
-        <label className="text-md text-neutral-950" htmlFor="password">
+        <label
+          className="text-md text-neutral-950 dark:text-white"
+          htmlFor="password"
+        >
           Password
         </label>
         <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          className="rounded-md px-4 py-2 bg-inherit border mb-6 dark:bg-white text-neutral-950"
           type="password"
           name="password"
           placeholder="••••••••"
