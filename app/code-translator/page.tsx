@@ -66,6 +66,10 @@ export default function CodeTranslator() {
     setTimeout(() => setShowNotification(false), 1000);
   };
 
+  const deleteInputCode = () => {
+    setCode('');
+  };
+
   const getLanguage = (language: string) => {
     switch (language) {
       case 'Python':
@@ -130,6 +134,12 @@ export default function CodeTranslator() {
             required
           ></textarea>
         </div>
+        <button
+          onClick={deleteInputCode}
+          className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1 mt-1 mb-2"
+        >
+          Clear Code
+        </button>
         <div className="mb-4">
           <label
             htmlFor="targetLanguage"
