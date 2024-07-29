@@ -1,9 +1,10 @@
 import React from 'react';
-import { useRouter } from 'next/router'; // Update import statement
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function ConfirmationSuccess() {
-  const router = useRouter();
-  const token = router.query.token; // Eğer token geçiliyorsa, burada alınabilir
+  const searchParams = useSearchParams();
+  const token = searchParams.get('token'); // Eğer URL'de `token` parametresi varsa bu şekilde alınabilir
+
   return (
     <div className="container mx-auto text-center p-4">
       <h1 className="text-2xl font-bold">Üyeliğiniz Doğrulandı!</h1>
