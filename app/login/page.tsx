@@ -9,13 +9,32 @@ export default function Login({
 }: {
   searchParams: { message: string; redirect?: string };
 }) {
+  // const signIn = async (formData: FormData) => {
+  //   'use server';
+
+  //   const email = formData.get('email') as string;
+  //   const password = formData.get('password') as string;
+  //   const supabase = createClient();
+  //   const redirectUrl = searchParams.redirect || '/code-translator'; // Default to /protected if no redirect is specified
+
+  //   const { error } = await supabase.auth.signInWithPassword({
+  //     email,
+  //     password,
+  //   });
+
+  //   if (error) {
+  //     return redirect(`/login?message=Could not authenticate user`);
+  //   }
+
+  //   return redirect(redirectUrl);
+  // };
   const signIn = async (formData: FormData) => {
     'use server';
 
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const supabase = createClient();
-    const redirectUrl = searchParams.redirect || '/code-translator'; // Default to /protected if no redirect is specified
+    const redirectUrl = searchParams.redirect || '/code-translator'; // Default to /code-translator if no redirect is specified
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
@@ -23,12 +42,44 @@ export default function Login({
     });
 
     if (error) {
-      return redirect(`/login?message=Could not authenticate user`);
+      // console.error('Sign In Error:', error); // Log the error details for debugging
+
+      if (error.code === 'auth/invalid-email') {
+        return redirect(`/login?message=Invalid email address.`);
+      } else if (error.code === 'auth/invalid-password') {
+        return redirect(`/login?message=Incorrect password. Please try again.`);
+      } else {
+        return redirect(
+          `/login?message=Could not authenticate user. Please check your credentials and try again.`
+        );
+      }
     }
 
     return redirect(redirectUrl);
   };
 
+  // const signUp = async (formData: FormData) => {
+  //   'use server';
+
+  //   const origin = headers().get('origin');
+  //   const email = formData.get('email') as string;
+  //   const password = formData.get('password') as string;
+  //   const supabase = createClient();
+
+  //   const { error } = await supabase.auth.signUp({
+  //     email,
+  //     password,
+  //     options: {
+  //       emailRedirectTo: `${origin}/auth/callback`,
+  //     },
+  //   });
+
+  //   if (error) {
+  //     return redirect(`/login?message=Could not authenticate user`);
+  //   }
+
+  //   return redirect(`/login?message=Check email to continue sign in process`);
+  // };
   const signUp = async (formData: FormData) => {
     'use server';
 
@@ -46,7 +97,21 @@ export default function Login({
     });
 
     if (error) {
-      return redirect(`/login?message=Could not authenticate user`);
+      // console.error('Sign Up Error:', error); // Log the error details for debugging
+
+      if (error.code === 'auth/email-already-exists') {
+        return redirect(
+          `/login?message=Email already registered. Please sign in.`
+        );
+      } else if (error.code === 'over_email_send_rate_limit') {
+        return redirect(
+          `/login?message=Too many sign-up attempts. Please try again later.`
+        );
+      } else {
+        return redirect(
+          `/login?message=Could not sign up user. Please try again.`
+        );
+      }
     }
 
     return redirect(`/login?message=Check email to continue sign in process`);
