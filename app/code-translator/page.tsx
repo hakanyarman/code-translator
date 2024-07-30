@@ -98,7 +98,7 @@ export default function CodeTranslator() {
       <div className="flex items-center mb-4 bg-gray-100">
         <Link
           href="/"
-          className="py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm bg-neutral-300 mr-4"
+          className="py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm bg-neutral-300 mr-4 dark:bg-zinc-400"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +130,7 @@ export default function CodeTranslator() {
             id="code"
             value={code}
             onChange={(e) => setCode(e.target.value)}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-600 block w-full p-2.5 h-48 shadow-2xl shadow-indigo-500/40  border border-gray-300"
+            className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-600 block w-full p-2.5 h-48 shadow-2xl shadow-indigo-500/40  border border-gray-300"
             required
           ></textarea>
         </div>

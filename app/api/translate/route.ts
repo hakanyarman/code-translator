@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { createClient } from '@/utils/supabase/server';
 
 // Create an Anthropic API client (that's edge friendly)
 const anthropic = new Anthropic({
@@ -32,7 +33,31 @@ export async function POST(req: Request) {
 
     // Assuming response.content[0].text contains the translated code
     //@ts-ignore
-    return new Response(JSON.stringify({ text: response.content[0]['text'] }), {
+    const translatedCode = response.content[0]['text'];
+
+    // Save the translation to Supabase
+    const supabase = createClient();
+    const { data: user, error: userError } = await supabase.auth.getUser();
+    if (userError) {
+      console.error('Could not get user info:', userError);
+      return;
+    }
+
+    const { error: insertError } = await supabase
+      .from('code_translations')
+      .insert({
+        user_id: user.user.id,
+        source_code: code,
+        translated_code: translatedCode,
+        source_language: includeComments ? 'source' : 'source',
+        target_language: targetLanguage,
+      });
+
+    if (insertError) {
+      console.error('Could not save translation:', insertError);
+    }
+
+    return new Response(JSON.stringify({ text: translatedCode }), {
       headers: { 'Content-Type': 'application/json' },
       status: 200,
     });
