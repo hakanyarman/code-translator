@@ -13,9 +13,9 @@ export async function POST(req: Request) {
 
     const prompt = includeComments
       ? `You are a code translator. Translate the following code to the specified programming language without any explanation. just target language code.
-          no title. only code. Code: ${code}\nTranslate to: ${targetLanguage} just add comments explaining the functionality of each lines.  dont give markdown signs and target language name. dont give target language in backtick character.for example never give me code in. \`\`\`  javascript  \`\`\`  `
+          no title. only code. Code: ${code}\nTranslate to: ${targetLanguage} just add comments explaining the functionality of each lines.  dont give markdown signs and target language name. dont give target language in backtick character.for example never give me code in. \`\`\`  javascript  \`\`\` if the code i wrote is invalid or not code just say "Invalid code". If the input i wrote does not belong to any programming language (for example: nonsense things like "qengolqev","adgwrgorb"), do not try to translate it to the programming language I want, just give the output "invalid code". Think first, if the input I gave you is not a code block, answer me directly with "invalid code".   `
       : `You are a code translator. Translate the following code to the specified programming language without any explanation. just target language code.
-          no title. only code. Code: ${code}\nTranslate to: ${targetLanguage} dont give markdown signs and target language name. dont give target language in backtick character. for example never give me code in. \`\`\`  javascript  \`\`\` `;
+          no title. only code. Code: ${code}\nTranslate to: ${targetLanguage} dont give markdown signs and target language name. dont give target language in backtick character. for example never give me code in. \`\`\`  javascript  \`\`\` If the input i wrote does not belong to any programming language (for example: nonsense things like "qengolqev","adgwrgorb"), do not try to translate it to the programming language I want, just give the output "invalid code"  Think first, if the input I gave you is not a code block, answer me directly with "invalid code".`;
 
     const response = await anthropic.messages.create({
       messages: [
