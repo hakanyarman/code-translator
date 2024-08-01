@@ -43,6 +43,19 @@ export default function CodeTranslator() {
     TranslationHistoryItem[]
   >([]);
 
+  const [showEmptyHistoryNotification, setShowEmptyHistoryNotification] =
+    useState(false);
+
+  useEffect(() => {
+    if (showHistory && translationHistory.length === 0) {
+      setShowEmptyHistoryNotification(true);
+      const timer = setTimeout(() => {
+        setShowEmptyHistoryNotification(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [showHistory, translationHistory.length]);
+
   useEffect(() => {
     const storedHistory = localStorage.getItem('translationHistory');
     if (storedHistory) {
@@ -132,7 +145,7 @@ export default function CodeTranslator() {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex items-center mb-4 bg-gray-100">
+      <div className="flex items-center mb-4 ">
         <Link
           href="/"
           className="py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm bg-neutral-300 mr-4 dark:bg-zinc-400"
@@ -230,7 +243,7 @@ export default function CodeTranslator() {
             Translated Code:
           </h2>
 
-          <div className="shadow-2xl shadow-indigo-500/40 bg-red-50 border border-gray-300 rounded-md">
+          <div className="shadow-2xl shadow-indigo-500/40 bg-red-50 border border-gray-300 rounded-md relative">
             <SyntaxHighlighter
               language={getLanguage(targetLanguage)}
               style={solarizedlight}
@@ -238,14 +251,24 @@ export default function CodeTranslator() {
             >
               {translatedCode}
             </SyntaxHighlighter>
+            <button
+              onClick={handleCopy}
+              className="absolute end-2 top-2  text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center"
+            >
+              <span id="default-icon">
+                <svg
+                  className="w-3.5 h-3.5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 18 20"
+                >
+                  <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
+                </svg>
+              </span>
+              copy
+            </button>
           </div>
-
-          <button
-            onClick={handleCopy}
-            className="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1 mt-2"
-          >
-            Copy
-          </button>
 
           {showNotification && (
             <div className="fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg">
@@ -254,19 +277,24 @@ export default function CodeTranslator() {
           )}
         </div>
       )}
+
       <button
         className="text-white bg-purple-500		 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center my-3 "
         onClick={() => setShowHistory(!showHistory)}
       >
-        Show/Hide Code History
+        {showHistory ? 'Hide ' : 'Show '}
+        Code History
       </button>
       {showHistory && (
         <div className="code-history mt-4">
-          {translationHistory.length > 0 ? (
-            ''
-          ) : (
-            <p>Start translating to build your history</p>
-          )}
+          {translationHistory.length > 0
+            ? ''
+            : showEmptyHistoryNotification && (
+                <p className="fixed bottom-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg">
+                  There is no code history yet. Start translating to build your
+                  history
+                </p>
+              )}
           {translationHistory.map((item, index) => (
             <div key={index} className="mb-4 p-4 bg-gray-100 rounded-lg">
               <h3 className="font-bold">
