@@ -304,7 +304,7 @@ export default function CodeTranslator() {
                 {item.originalCode}
               </pre>
               <h3 className="font-bold">Translated Code:</h3>
-              <pre className="bg-white p-2 rounded mt-1">
+              <pre className="bg-white  rounded mt-1">
                 <SyntaxHighlighter
                   language={getLanguage(targetLanguage)}
                   style={dracula}
