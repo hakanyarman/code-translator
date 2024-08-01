@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -10,6 +10,7 @@ import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
 
 import { createClient } from '@/utils/supabase/server';
+
 import { redirect } from 'next/navigation';
 import AuthButton from '@/components/AuthButton';
 import {
@@ -20,6 +21,15 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+interface TranslationHistoryItem {
+  originalCode: string;
+  translatedCode: string;
+  targetLanguage: string;
+  timestamp: number;
+}
 
 export default function CodeTranslator() {
   const [code, setCode] = useState('');
@@ -28,7 +38,17 @@ export default function CodeTranslator() {
   const [loading, setLoading] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [includeComments, setIncludeComments] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+  const [translationHistory, setTranslationHistory] = useState<
+    TranslationHistoryItem[]
+  >([]);
 
+  useEffect(() => {
+    const storedHistory = localStorage.getItem('translationHistory');
+    if (storedHistory) {
+      setTranslationHistory(JSON.parse(storedHistory));
+    }
+  }, []);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -52,6 +72,23 @@ export default function CodeTranslator() {
 
       // response.content[0].text varsayımı yaparak çevirisi yapılmış kodu al
       setTranslatedCode(data.text || ''); // Yanıt yapısına göre `text` alanını kontrol edin
+
+      const newHistoryItem: TranslationHistoryItem = {
+        originalCode: code,
+        translatedCode: data.text,
+        targetLanguage,
+        timestamp: Date.now(),
+      };
+
+      const updatedHistory = [newHistoryItem, ...translationHistory].slice(
+        0,
+        5
+      );
+      setTranslationHistory(updatedHistory);
+      localStorage.setItem(
+        'translationHistory',
+        JSON.stringify(updatedHistory)
+      );
     } catch (error) {
       console.error('Error:', error);
       // Hata mesajı işleme
@@ -187,12 +224,12 @@ export default function CodeTranslator() {
           {loading ? 'Translating...' : 'Translate'}
         </button>
       </form>
-
       {translatedCode && (
         <div className="mt-6">
           <h2 className="text-xl font-bold mb-2 text-black dark:text-white">
             Translated Code:
           </h2>
+
           <div className="shadow-2xl shadow-indigo-500/40 bg-red-50 border border-gray-300 rounded-md">
             <SyntaxHighlighter
               language={getLanguage(targetLanguage)}
@@ -202,16 +239,64 @@ export default function CodeTranslator() {
               {translatedCode}
             </SyntaxHighlighter>
           </div>
+
           <button
             onClick={handleCopy}
             className="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1 mt-2"
           >
             Copy
           </button>
+
           {showNotification && (
             <div className="fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg">
               Copied to clipboard!
             </div>
+          )}
+        </div>
+      )}
+      <button
+        className="text-white bg-purple-500		 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center my-3 "
+        onClick={() => setShowHistory(!showHistory)}
+      >
+        Show/Hide Code History
+      </button>
+      {showHistory && (
+        <div className="code-history mt-4">
+          {translationHistory.length > 0 ? (
+            ''
+          ) : (
+            <p>Start translating to build your history</p>
+          )}
+          {translationHistory.map((item, index) => (
+            <div key={index} className="mb-4 p-4 bg-gray-100 rounded-lg">
+              <h3 className="font-bold">
+                Original Code (translated to {item.targetLanguage}):
+              </h3>
+              <pre className="bg-white p-2 rounded mt-1 mb-2">
+                {item.originalCode}
+              </pre>
+              <h3 className="font-bold">Translated Code:</h3>
+              <pre className="bg-white p-2 rounded mt-1">
+                <SyntaxHighlighter
+                  language={getLanguage(targetLanguage)}
+                  style={dracula}
+                  showLineNumbers={true}
+                >
+                  {item.translatedCode}
+                </SyntaxHighlighter>
+              </pre>
+              <p className="text-sm text-gray-500 mt-2">
+                Translation Date: {new Date(item.timestamp).toLocaleString()}
+              </p>
+            </div>
+          ))}
+          {translationHistory.length > 0 && (
+            <button
+              className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1 mt-2"
+              onClick={() => setTranslationHistory([])}
+            >
+              Remove History
+            </button>
           )}
         </div>
       )}

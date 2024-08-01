@@ -1,5 +1,5 @@
 'use client';
-
+// wrg
 import { useEffect, useRef } from 'react';
 import { useChat } from 'ai/react';
 import Link from 'next/link';
