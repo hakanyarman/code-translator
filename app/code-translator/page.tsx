@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { vs, xonokai } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 import * as React from 'react';
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { useTheme } from 'next-themes';
@@ -23,6 +25,7 @@ import {
 import { Checkbox } from '@/components/ui/checkbox';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import clsx from 'clsx';
 
 interface TranslationHistoryItem {
   originalCode: string;
@@ -37,6 +40,7 @@ export default function CodeTranslator() {
   const [translatedCode, setTranslatedCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [showHistoryNotification, setShowHistoryNotification] = useState(false);
   const [includeComments, setIncludeComments] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [translationHistory, setTranslationHistory] = useState<
@@ -45,6 +49,45 @@ export default function CodeTranslator() {
 
   const [showEmptyHistoryNotification, setShowEmptyHistoryNotification] =
     useState(false);
+  const [copiedItemTimestamp, setCopiedItemTimestamp] = useState<number | null>(
+    null
+  );
+
+  const eyeOffSvg = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      className="feather feather-eye-off "
+    >
+      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+      <line x1="1" y1="1" x2="23" y2="23"></line>
+    </svg>
+  );
+
+  const eyeSvg = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      className="feather feather-eye "
+    >
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+      <circle cx="12" cy="12" r="3"></circle>
+    </svg>
+  );
 
   useEffect(() => {
     if (showHistory && translationHistory.length === 0) {
@@ -116,6 +159,16 @@ export default function CodeTranslator() {
     setTimeout(() => setShowNotification(false), 1000);
   };
 
+  const handleCopyHistory = (historyItem: TranslationHistoryItem) => {
+    navigator.clipboard.writeText(historyItem.translatedCode);
+    setShowHistoryNotification(true);
+    setCopiedItemTimestamp(historyItem.timestamp);
+    setTimeout(() => {
+      setShowHistoryNotification(false);
+      setCopiedItemTimestamp(null);
+    }, 2000);
+  };
+
   const deleteInputCode = () => {
     setCode('');
   };
@@ -166,7 +219,9 @@ export default function CodeTranslator() {
           </svg>
           Back
         </Link>
-        <h2 className="text-blue-900 text-2xl font-bold">Code Translator</h2>
+        <div>
+          <h2 className="text-blue-900 text-2xl font-bold">Code Translator</h2>
+        </div>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-4 mt-6 pt-4 ">
@@ -231,10 +286,27 @@ export default function CodeTranslator() {
 
         <button
           type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center flex justify-center items-center"
           disabled={loading}
         >
           {loading ? 'Translating...' : 'Translate'}
+          <span className="mx-1 h-3.5 flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              className="feather feather-code "
+            >
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </span>
         </button>
       </form>
       {translatedCode && (
@@ -257,16 +329,21 @@ export default function CodeTranslator() {
             >
               <span id="default-icon">
                 <svg
-                  className="w-3.5 h-3.5"
-                  aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 18 20"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  className="feather feather-copy"
                 >
-                  <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                 </svg>
               </span>
-              copy
             </button>
           </div>
 
@@ -279,10 +356,13 @@ export default function CodeTranslator() {
       )}
 
       <button
-        className="text-white bg-purple-500		 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center my-3 "
+        className={clsx(
+          'text-white 		 hover:bg-lime-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center my-3 flex justify-center ',
+          showHistory ? 'bg-red-400' : 'bg-lime-500'
+        )}
         onClick={() => setShowHistory(!showHistory)}
       >
-        {showHistory ? 'Hide ' : 'Show '}
+        <span className="mr-2"> {showHistory ? eyeOffSvg : eyeSvg}</span>
         Code History
       </button>
       {showHistory && (
@@ -304,20 +384,58 @@ export default function CodeTranslator() {
                 {item.originalCode}
               </pre>
               <h3 className="font-bold">Translated Code:</h3>
-              <pre className="bg-white  rounded mt-1">
+              <pre className="relative bg-white  rounded mt-1">
                 <SyntaxHighlighter
                   language={getLanguage(targetLanguage)}
-                  style={dracula}
+                  style={xonokai}
                   showLineNumbers={true}
                 >
                   {item.translatedCode}
                 </SyntaxHighlighter>
+                <button
+                  onClick={() => handleCopyHistory(item)}
+                  className="absolute end-2 top-2 text-white "
+                >
+                  <span id="default-icon ">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      className="feather feather-copy"
+                    >
+                      <rect
+                        x="9"
+                        y="9"
+                        width="13"
+                        height="13"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                  </span>
+                  {/* <span className="mr-2">copy</span> */}
+                </button>
+                {showHistoryNotification &&
+                  copiedItemTimestamp === item.timestamp && (
+                    <div className="fixed bottom-4 right-4 bg-green-600 text-white px-2 py-2 rounded-lg shadow-lg z-50 text-xs">
+                      Code translation dated{' '}
+                      {new Date(item.timestamp).toLocaleString()} is copied
+                    </div>
+                  )}
               </pre>
               <p className="text-sm text-gray-500 mt-2">
                 Translation Date: {new Date(item.timestamp).toLocaleString()}
               </p>
             </div>
           ))}
+
           {translationHistory.length > 0 && (
             <button
               className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1 mt-2"
