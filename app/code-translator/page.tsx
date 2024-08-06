@@ -52,6 +52,7 @@ export default function CodeTranslator() {
   const [copiedItemTimestamp, setCopiedItemTimestamp] = useState<number | null>(
     null
   );
+  const [showScrollButton, setShowScrollButton] = useState(false);
 
   const eyeOffSvg = (
     <svg
@@ -105,6 +106,23 @@ export default function CodeTranslator() {
       setTranslationHistory(JSON.parse(storedHistory));
     }
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -173,6 +191,24 @@ export default function CodeTranslator() {
     setCode('');
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  };
+
+  const toggleHistory = () => {
+    setShowHistory((prev) => !prev);
+    if (!showHistory) {
+      setTimeout(scrollToBottom, 100);
+    }
+  };
+
   const getLanguage = (language: string) => {
     switch (language) {
       case 'Python':
@@ -197,7 +233,7 @@ export default function CodeTranslator() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 relative pb-16">
       <div className="flex items-center mb-4 ">
         <Link
           href="/"
@@ -357,10 +393,10 @@ export default function CodeTranslator() {
 
       <button
         className={clsx(
-          'text-white 		 hover:bg-lime-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center my-3 flex justify-center ',
+          'text-white hover:bg-lime-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center my-3 flex justify-center',
           showHistory ? 'bg-red-400' : 'bg-lime-500'
         )}
-        onClick={() => setShowHistory(!showHistory)}
+        onClick={toggleHistory}
       >
         <span className="mr-2"> {showHistory ? eyeOffSvg : eyeSvg}</span>
         Code History
@@ -420,7 +456,6 @@ export default function CodeTranslator() {
                       <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                     </svg>
                   </span>
-                  {/* <span className="mr-2">copy</span> */}
                 </button>
                 {showHistoryNotification &&
                   copiedItemTimestamp === item.timestamp && (
@@ -437,14 +472,41 @@ export default function CodeTranslator() {
           ))}
 
           {translationHistory.length > 0 && (
-            <button
-              className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1 mt-2"
-              onClick={() => setTranslationHistory([])}
-            >
-              Remove History
-            </button>
+            <>
+              <hr></hr>
+              <button
+                className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1 mt-2"
+                onClick={() => setTranslationHistory([])}
+              >
+                Remove History
+              </button>
+            </>
           )}
         </div>
+      )}
+      {showScrollButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-4 right-4 text-white bg-sky-500 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1 z-10 transition-opacity duration-300"
+        >
+          <svg
+            className="w-6 h-6 text-gray-800 dark:text-white"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6v13m0-13 4 4m-4-4-4 4"
+            />
+          </svg>
+        </button>
       )}
     </div>
   );
